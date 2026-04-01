@@ -36,121 +36,332 @@
   --transition: 180ms cubic-bezier(0.16, 1, 0.3, 1);
 }
 html { scroll-behavior: smooth; font-size: 16px; }
-body { background: var(--bg); color: var(--text); font-family: var(--font-body); font-size: 1.125rem; line-height: 1.75; -webkit-font-smoothing: antialiased; overflow-x: hidden; }
+body {
+  background: var(--bg); color: var(--text); font-family: var(--font-body);
+  font-size: 1.125rem; line-height: 1.75; -webkit-font-smoothing: antialiased; overflow-x: hidden;
+}
 a { color: var(--accent); text-decoration: none; }
-#nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; background: rgba(10,10,10,0.92); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); border-bottom: 1px solid var(--border); }
-.nav-inner { max-width: var(--wide-width); margin: 0 auto; padding: 0 2rem; height: 64px; display: flex; align-items: center; justify-content: space-between; }
-.nav-logo { font-family: var(--font-mono); font-size: 0.8125rem; font-weight: 500; color: var(--text); text-decoration: none; letter-spacing: 0.15em; text-transform: uppercase; }
+
+/* NAV */
+#nav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+  background: rgba(10,10,10,0.92); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--border);
+}
+.nav-inner {
+  max-width: var(--wide-width); margin: 0 auto; padding: 0 2rem;
+  height: 64px; display: flex; align-items: center; justify-content: space-between;
+}
+.nav-logo {
+  font-family: var(--font-mono); font-size: 0.8125rem; font-weight: 500;
+  color: var(--text); text-decoration: none; letter-spacing: 0.15em; text-transform: uppercase;
+}
 .nav-links { display: flex; align-items: center; gap: 2rem; }
-.nav-link { font-family: var(--font-body); font-size: 0.8125rem; color: var(--text-muted); text-decoration: none; letter-spacing: 0.04em; transition: color var(--transition); }
+.nav-link {
+  font-family: var(--font-body); font-size: 0.8125rem; color: var(--text-muted);
+  text-decoration: none; letter-spacing: 0.04em; transition: color var(--transition);
+}
 .nav-link:hover { color: var(--highlight); }
-.nav-cta { font-family: var(--font-mono); font-size: 0.75rem; letter-spacing: 0.08em; color: var(--bg); background: var(--accent); padding: 0.5rem 1.25rem; border-radius: 4px; text-decoration: none; transition: background var(--transition), transform var(--transition); }
+.nav-cta {
+  font-family: var(--font-mono); font-size: 0.75rem; letter-spacing: 0.08em;
+  color: var(--bg); background: var(--accent); padding: 0.5rem 1.25rem; border-radius: 4px;
+  text-decoration: none; transition: background var(--transition), transform var(--transition);
+}
 .nav-cta:hover { background: var(--accent-hover); transform: translateY(-1px); }
-#progress { position: fixed; top: 0; left: 0; height: 2px; background: linear-gradient(90deg, var(--accent), var(--highlight)); width: 0%; z-index: 9999; transition: width 0.1s linear; }
+
+/* PROGRESS */
+#progress {
+  position: fixed; top: 0; left: 0; height: 2px;
+  background: linear-gradient(90deg, var(--accent), var(--highlight));
+  width: 0%; z-index: 9999; transition: width 0.1s linear;
+}
+
+/* LAYOUT */
 .container { max-width: var(--content-width); margin: 0 auto; padding: 0 2rem; }
 .container-wide { max-width: var(--wide-width); margin: 0 auto; padding: 0 2rem; }
 section { padding: clamp(3.5rem, 6vw, 6rem) 0; border-bottom: 1px solid var(--border-subtle); }
 section:last-of-type { border-bottom: none; }
-#hero { min-height: 100vh; display: flex; flex-direction: column; justify-content: center; padding: 8rem 0 6rem; position: relative; overflow: hidden; }
+
+/* HERO */
+#hero {
+  min-height: 100vh; display: flex; flex-direction: column; justify-content: center;
+  padding: 8rem 0 6rem; position: relative; overflow: hidden;
+}
 .hero-bg { position: absolute; inset: 0; pointer-events: none; z-index: 0; }
-.hero-grid { position: absolute; inset: 0; background-image: linear-gradient(var(--border-subtle) 1px, transparent 1px), linear-gradient(90deg, var(--border-subtle) 1px, transparent 1px); background-size: 60px 60px; opacity: 0.4; mask-image: radial-gradient(ellipse 80% 60% at 50% 50%, black 30%, transparent 80%); }
-.hero-glow { position: absolute; top: 10%; left: 10%; width: 600px; height: 600px; background: radial-gradient(circle, rgba(126,200,212,0.07) 0%, transparent 70%); border-radius: 50%; animation: glow-drift 12s ease-in-out infinite alternate; }
-.hero-glow-2 { position: absolute; bottom: 10%; right: 10%; width: 500px; height: 500px; background: radial-gradient(circle, rgba(79,152,163,0.05) 0%, transparent 70%); border-radius: 50%; animation: glow-drift 15s ease-in-out infinite alternate-reverse; }
-@keyframes glow-drift { 0% { transform: translate(0, 0) scale(1); } 100% { transform: translate(40px, -30px) scale(1.1); } }
-.hero-content { position: relative; z-index: 1; max-width: var(--wide-width); margin: 0 auto; padding: 0 2rem; width: 100%; }
-.hero-eyebrow { font-family: var(--font-mono); font-size: 0.75rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--highlight); margin-bottom: 1.5rem; display: flex; align-items: center; gap: 1rem; opacity: 0; animation: fade-up 0.8s var(--ease-out) 0.2s forwards; }
+.hero-grid {
+  position: absolute; inset: 0;
+  background-image: linear-gradient(var(--border-subtle) 1px, transparent 1px), linear-gradient(90deg, var(--border-subtle) 1px, transparent 1px);
+  background-size: 60px 60px; opacity: 0.4;
+  mask-image: radial-gradient(ellipse 80% 60% at 50% 50%, black 30%, transparent 80%);
+}
+.hero-glow {
+  position: absolute; top: 10%; left: 10%; width: 600px; height: 600px;
+  background: radial-gradient(circle, rgba(126,200,212,0.07) 0%, transparent 70%);
+  border-radius: 50%; animation: glow-drift 12s ease-in-out infinite alternate;
+}
+.hero-glow-2 {
+  position: absolute; bottom: 10%; right: 10%; width: 500px; height: 500px;
+  background: radial-gradient(circle, rgba(79,152,163,0.05) 0%, transparent 70%);
+  border-radius: 50%; animation: glow-drift 15s ease-in-out infinite alternate-reverse;
+}
+@keyframes glow-drift {
+  0% { transform: translate(0, 0) scale(1); }
+  100% { transform: translate(40px, -30px) scale(1.1); }
+}
+.hero-content {
+  position: relative; z-index: 1; max-width: var(--wide-width);
+  margin: 0 auto; padding: 0 2rem; width: 100%;
+}
+.hero-eyebrow {
+  font-family: var(--font-mono); font-size: 0.75rem; letter-spacing: 0.2em;
+  text-transform: uppercase; color: var(--highlight); margin-bottom: 1.5rem;
+  display: flex; align-items: center; gap: 1rem;
+  opacity: 0; animation: fade-up 0.8s var(--ease-out) 0.2s forwards;
+}
 .hero-eyebrow::before { content: ''; display: inline-block; width: 2rem; height: 1px; background: var(--highlight); }
-.hero-title { font-family: var(--font-display); font-size: clamp(3.2rem, 7.5vw, 7rem); font-weight: 600; line-height: 0.95; letter-spacing: -0.02em; color: var(--text); margin-bottom: 1.5rem; max-width: 18ch; opacity: 0; animation: fade-up 0.8s var(--ease-out) 0.35s forwards; }
+.hero-title {
+  font-family: var(--font-display); font-size: clamp(3.2rem, 7.5vw, 7rem);
+  font-weight: 600; line-height: 0.95; letter-spacing: -0.02em;
+  color: var(--text); margin-bottom: 1.5rem; max-width: 18ch;
+  opacity: 0; animation: fade-up 0.8s var(--ease-out) 0.35s forwards;
+}
 .hero-title em { font-style: italic; color: var(--highlight); }
-.hero-subtitle { font-family: var(--font-display); font-size: clamp(1.25rem, 2.5vw, 1.75rem); font-weight: 400; font-style: italic; color: var(--text-muted); margin-bottom: 2rem; max-width: 55ch; line-height: 1.4; opacity: 0; animation: fade-up 0.8s var(--ease-out) 0.5s forwards; }
-.hero-body { font-size: 0.9375rem; color: var(--text-muted); max-width: 58ch; margin-bottom: 2.5rem; line-height: 1.7; opacity: 0; animation: fade-up 0.8s var(--ease-out) 0.6s forwards; }
+.hero-subtitle {
+  font-family: var(--font-display); font-size: clamp(1.25rem, 2.5vw, 1.75rem);
+  font-weight: 400; font-style: italic; color: var(--text-muted);
+  margin-bottom: 2rem; max-width: 55ch; line-height: 1.4;
+  opacity: 0; animation: fade-up 0.8s var(--ease-out) 0.5s forwards;
+}
+.hero-body {
+  font-size: 0.9375rem; color: var(--text-muted); max-width: 58ch;
+  margin-bottom: 2.5rem; line-height: 1.7;
+  opacity: 0; animation: fade-up 0.8s var(--ease-out) 0.6s forwards;
+}
 .hero-body p + p { margin-top: 1rem; }
-.hero-ctas { display: flex; gap: 1rem; flex-wrap: wrap; opacity: 0; animation: fade-up 0.8s var(--ease-out) 0.7s forwards; }
-@keyframes fade-up { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
-.btn { display: inline-flex; align-items: center; gap: 0.5rem; font-family: var(--font-mono); font-size: 0.8125rem; letter-spacing: 0.08em; padding: 0.85rem 2rem; border-radius: 4px; text-decoration: none; transition: all var(--transition); cursor: pointer; border: none; }
+.hero-ctas {
+  display: flex; gap: 1rem; flex-wrap: wrap;
+  opacity: 0; animation: fade-up 0.8s var(--ease-out) 0.7s forwards;
+}
+@keyframes fade-up {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* BUTTONS */
+.btn {
+  display: inline-flex; align-items: center; gap: 0.5rem;
+  font-family: var(--font-mono); font-size: 0.8125rem; letter-spacing: 0.08em;
+  padding: 0.85rem 2rem; border-radius: 4px; text-decoration: none;
+  transition: all var(--transition); cursor: pointer; border: none;
+}
 .btn-primary { background: var(--accent); color: var(--bg); }
 .btn-primary:hover { background: var(--accent-hover); transform: translateY(-2px); box-shadow: 0 8px 30px rgba(79,152,163,0.25); }
-.btn-primary::after { content: '\2192'; margin-left: 0.5rem; transition: transform var(--transition); }
+.btn-primary::after { content: '\2192'; margin-left: 0.25rem; transition: transform var(--transition); }
 .btn-primary:hover::after { transform: translateX(4px); }
-.btn-ghost { background: transparent; border: 1px solid var(--border); color: var(--text-muted); }
-.btn-ghost:hover { border-color: var(--highlight); color: var(--text); }
 .btn-accent { background: var(--highlight); color: var(--bg); }
 .btn-accent:hover { background: #6ab8c4; transform: translateY(-2px); }
-.hero-stats { display: grid; grid-template-columns: repeat(4, auto); gap: 0; width: fit-content; }
-.stat-item { padding: 1.75rem 2.5rem; border: 1px solid var(--border); background: var(--bg-surface); transition: background var(--transition); }
-.stat-item:not(:last-child) { border-right: none; }
-.stat-item:hover { background: var(--bg-surface-2); }
-.stat-number { font-family: var(--font-display); font-size: clamp(2rem, 4vw, 3rem); font-weight: 700; color: var(--text); line-height: 1; display: block; }
-.stat-label { font-family: var(--font-mono); font-size: 0.6875rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--text-muted); margin-top: 0.5rem; display: block; }
-.section-label { font-family: var(--font-mono); font-size: 0.6875rem; letter-spacing: 0.15em; text-transform: uppercase; color: var(--highlight); margin-bottom: 1rem; display: block; }
-.section-title { font-family: var(--font-display); font-size: clamp(2rem, 4vw, 3.25rem); font-weight: 600; line-height: 1.15; color: var(--text); margin-bottom: 1.5rem; }
-.section-subtitle { font-family: var(--font-display); font-size: clamp(1.05rem, 1.8vw, 1.35rem); font-weight: 400; font-style: italic; color: var(--text-muted); margin-bottom: 2.5rem; line-height: 1.5; }
+.btn-accent::after { content: '\2192'; margin-left: 0.25rem; transition: transform var(--transition); }
+.btn-accent:hover::after { transform: translateX(4px); }
+.btn-ghost { background: transparent; border: 1px solid var(--border); color: var(--text-muted); }
+.btn-ghost:hover { border-color: var(--highlight); color: var(--text); }
+.btn-full { width: 100%; justify-content: center; }
+
+/* SECTION TYPOGRAPHY */
+.section-label {
+  font-family: var(--font-mono); font-size: 0.6875rem; letter-spacing: 0.15em;
+  text-transform: uppercase; color: var(--highlight); margin-bottom: 1rem; display: block;
+}
+.section-title {
+  font-family: var(--font-display); font-size: clamp(2rem, 4vw, 3.25rem);
+  font-weight: 600; line-height: 1.15; color: var(--text); margin-bottom: 1.5rem;
+}
+.section-subtitle {
+  font-family: var(--font-display); font-size: clamp(1.05rem, 1.8vw, 1.35rem);
+  font-weight: 400; font-style: italic; color: var(--text-muted);
+  margin-bottom: 2.5rem; line-height: 1.5;
+}
 .prose p { margin-bottom: 1.5rem; color: var(--text-muted); line-height: 1.75; font-size: 0.9375rem; }
 .prose p:last-child { margin-bottom: 0; }
 .prose strong { color: var(--text); font-weight: 600; }
-.two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 3rem; }
-.two-col p { color: var(--text-muted); line-height: 1.7; margin-bottom: 1rem; font-size: 0.9375rem; }
-.two-col p:last-child { margin-bottom: 0; }
-.two-col strong { color: var(--text); }
+
+/* STATS */
+.stats-row {
+  display: grid; grid-template-columns: repeat(4, auto); gap: 0; width: fit-content;
+}
+.stat-item {
+  padding: 1.75rem 2.5rem; border: 1px solid var(--border);
+  background: var(--bg-surface); transition: background var(--transition);
+}
+.stat-item:not(:last-child) { border-right: none; }
+.stat-item:hover { background: var(--bg-surface-2); }
+.stat-number {
+  font-family: var(--font-display); font-size: clamp(2rem, 4vw, 3rem);
+  font-weight: 700; color: var(--text); line-height: 1; display: block;
+}
+.stat-label {
+  font-family: var(--font-mono); font-size: 0.6875rem; letter-spacing: 0.12em;
+  text-transform: uppercase; color: var(--text-muted); margin-top: 0.5rem; display: block;
+}
+
+/* TWO COL */
+.two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 3rem; margin-top: 2rem; }
+
+/* PROCESS STEPS */
 .process-steps { display: flex; flex-direction: column; gap: 0; margin: 2rem 0; }
-.process-step { display: grid; grid-template-columns: 80px 1fr; gap: 2rem; padding: 2rem 0; border-bottom: 1px solid var(--border-subtle); transition: border-color var(--transition); }
+.process-step {
+  display: grid; grid-template-columns: 80px 1fr; gap: 2rem;
+  padding: 2.5rem 0; border-bottom: 1px solid var(--border-subtle);
+  transition: border-color var(--transition);
+}
 .process-step:last-child { border-bottom: none; }
 .process-step:hover { border-color: var(--border); }
-.step-number { font-family: var(--font-display); font-size: 3.5rem; font-weight: 700; line-height: 1; color: var(--bg-surface-3); transition: color 0.4s var(--ease-out); }
+.step-number {
+  font-family: var(--font-display); font-size: 3.5rem; font-weight: 700;
+  line-height: 1; color: var(--bg-surface-3); transition: color 0.4s var(--ease-out);
+}
 .process-step:hover .step-number { color: var(--highlight); }
-.step-title { font-family: var(--font-display); font-size: 1.35rem; font-weight: 600; color: var(--text); margin-bottom: 0.5rem; }
+.step-title {
+  font-family: var(--font-display); font-size: 1.35rem; font-weight: 600;
+  color: var(--text); margin-bottom: 0.5rem;
+}
 .step-body { font-size: 0.9375rem; color: var(--text-muted); line-height: 1.65; }
-.step-body strong { color: var(--text); }
-.reg-intro { font-size: 0.9375rem; color: var(--text-muted); line-height: 1.7; margin-bottom: 2rem; max-width: 65ch; }
-.reg-box { background: var(--bg-surface); border: 1px solid var(--border); border-radius: 8px; padding: 1.5rem 2rem; margin-bottom: 2.5rem; }
-.reg-box p { color: var(--text-muted); line-height: 1.7; font-size: 0.9375rem; }
-.reg-subhead { font-family: var(--font-mono); font-size: 0.6875rem; letter-spacing: 0.15em; text-transform: uppercase; color: var(--text-faint); margin-bottom: 1rem; margin-top: 2.5rem; }
-.compliance-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 1.25rem; margin: 1rem 0; }
-.compliance-tile { padding: 2rem 1.75rem; border: 1px solid var(--border); background: var(--bg-surface); border-radius: 8px; transition: border-color var(--transition), transform var(--transition), background var(--transition); text-decoration: none; display: block; }
+
+/* COMPLIANCE TILES */
+.compliance-grid {
+  display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 1.25rem; margin: 2.5rem 0;
+}
+.compliance-tile {
+  padding: 2rem 1.75rem; border: 1px solid var(--border); background: var(--bg-surface);
+  border-radius: 8px; text-decoration: none; display: block;
+  transition: border-color var(--transition), transform var(--transition), background var(--transition);
+}
 .compliance-tile:hover { border-color: var(--highlight); transform: translateY(-2px); background: var(--bg-surface-2); }
 .compliance-tile.active { border-color: var(--highlight); background: rgba(126,200,212,0.04); }
-.compliance-date { font-family: var(--font-mono); font-size: 0.75rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--highlight); margin-bottom: 0.75rem; }
-.compliance-name { font-family: var(--font-display); font-size: 1.375rem; font-weight: 600; color: var(--text); margin-bottom: 0.5rem; }
+.compliance-date {
+  font-family: var(--font-mono); font-size: 0.75rem; letter-spacing: 0.12em;
+  text-transform: uppercase; color: var(--highlight); margin-bottom: 0.75rem;
+}
+.compliance-name {
+  font-family: var(--font-display); font-size: 1.375rem; font-weight: 600;
+  color: var(--text); margin-bottom: 0.5rem;
+}
 .compliance-desc { font-size: 0.875rem; color: var(--text-muted); line-height: 1.5; margin-bottom: 1rem; }
-.compliance-status { font-family: var(--font-mono); font-size: 0.625rem; letter-spacing: 0.1em; text-transform: uppercase; padding: 0.25em 0.7em; border-radius: 3px; display: inline-block; }
+.compliance-status {
+  font-family: var(--font-mono); font-size: 0.625rem; letter-spacing: 0.1em;
+  text-transform: uppercase; padding: 0.25em 0.7em; border-radius: 3px; display: inline-block;
+}
 .status-live { color: var(--green); background: rgba(109,170,69,0.1); border: 1px solid rgba(109,170,69,0.2); }
 .status-imminent { color: var(--highlight); background: var(--highlight-dim); border: 1px solid rgba(126,200,212,0.25); }
 .status-approaching { color: var(--yellow); background: rgba(232,175,52,0.1); border: 1px solid rgba(232,175,52,0.2); }
-.compliance-link { font-family: var(--font-mono); font-size: 0.6875rem; color: var(--accent); letter-spacing: 0.04em; margin-top: 0.5rem; display: inline-block; }
+.compliance-link {
+  font-family: var(--font-mono); font-size: 0.6875rem; color: var(--accent);
+  letter-spacing: 0.04em; margin-top: 0.5rem; display: inline-block;
+}
 .compliance-tile:hover .compliance-link { color: var(--highlight); }
-.paths-grid { display: grid; grid-template-columns: 1.1fr 0.9fr; gap: 2rem; max-width: 900px; margin: 2rem auto 0; }
-.path-card { padding: 2.5rem; border: 1px solid var(--border); background: var(--bg-surface); border-radius: 12px; display: flex; flex-direction: column; gap: 1rem; transition: border-color var(--transition); position: relative; }
+
+/* PARTICIPATE CARDS */
+.paths-grid { display: grid; grid-template-columns: 1.1fr 0.9fr; gap: 2rem; max-width: 900px; margin: 0 auto; }
+.path-card {
+  padding: 2.5rem; border: 1px solid var(--border); background: var(--bg-surface);
+  border-radius: 12px; display: flex; flex-direction: column; gap: 1rem;
+  transition: border-color var(--transition); position: relative;
+}
 .path-card:hover { border-color: var(--accent); }
 .path-card.featured { border-color: var(--highlight); background: rgba(126,200,212,0.04); }
-.path-badge { position: absolute; top: -10px; right: 1.5rem; font-family: var(--font-mono); font-size: 0.625rem; letter-spacing: 0.1em; text-transform: uppercase; background: var(--highlight); color: var(--bg); padding: 0.3em 0.8em; border-radius: 3px; }
-.path-time { font-family: var(--font-mono); font-size: 0.6875rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--highlight); }
+.path-badge {
+  position: absolute; top: -10px; right: 1.5rem;
+  font-family: var(--font-mono); font-size: 0.625rem; letter-spacing: 0.1em;
+  text-transform: uppercase; background: var(--highlight); color: var(--bg);
+  padding: 0.3em 0.8em; border-radius: 3px;
+}
+.path-time {
+  font-family: var(--font-mono); font-size: 0.6875rem; letter-spacing: 0.12em;
+  text-transform: uppercase; color: var(--highlight);
+}
 .path-card h3 { font-family: var(--font-display); font-size: 1.4rem; font-weight: 600; color: var(--text); }
 .path-card > p { font-size: 0.875rem; color: var(--text-muted); line-height: 1.6; }
-.path-detail { list-style: none; padding: 0; }
-.path-detail li { font-size: 0.8125rem; color: var(--text-faint); padding: 0.3rem 0; padding-left: 1.25rem; position: relative; }
-.path-detail li::before { content: '\00B7'; position: absolute; left: 0; color: var(--highlight); font-weight: 700; }
+.path-details { list-style: none; padding: 0; }
+.path-details li {
+  font-size: 0.8125rem; color: var(--text-muted); padding: 0.35rem 0;
+  padding-left: 1.25rem; position: relative; line-height: 1.5;
+}
+.path-details li::before { content: '\00B7'; position: absolute; left: 0; color: var(--highlight); font-weight: 700; }
+
+/* ATTRIBUTION */
 .attr-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.25rem; margin: 2rem 0; }
-.attr-card { background: var(--bg-surface); border: 1px solid var(--border); border-radius: 8px; padding: 1.75rem; transition: border-color var(--transition); }
-.attr-card:hover { border-color: var(--highlight); }
-.attr-title { font-family: var(--font-display); font-size: 1.25rem; font-weight: 600; color: var(--text); margin-bottom: 0.5rem; }
+.attr-card {
+  background: var(--bg-surface); border: 1px solid var(--border); border-radius: 8px;
+  padding: 1.75rem; transition: border-color var(--transition);
+}
+.attr-card:hover { border-color: var(--border); }
+.attr-title {
+  font-family: var(--font-display); font-size: 1.1875rem; font-weight: 600;
+  color: var(--text); margin-bottom: 0.5rem;
+}
 .attr-desc { font-size: 0.875rem; color: var(--text-muted); line-height: 1.6; }
-.indicator-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 1.5rem; margin: 2rem 0; }
-.indicator-card { background: var(--bg-surface); border: 1px solid var(--border); border-left: 3px solid var(--highlight); border-radius: 0 8px 8px 0; padding: 1.75rem; transition: border-color var(--transition), transform var(--transition); }
+
+/* INDICATOR CARDS (benefits) */
+.indicator-grid {
+  display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 1.5rem; margin: 2.5rem 0;
+}
+.indicator-card {
+  background: var(--bg-surface); border: 1px solid var(--border);
+  border-left: 3px solid var(--highlight); border-radius: 0 8px 8px 0;
+  padding: 1.75rem; transition: border-color var(--transition), transform var(--transition);
+}
 .indicator-card:hover { border-left-color: var(--accent); transform: translateY(-2px); }
-.indicator-title { font-family: var(--font-display); font-size: 1.125rem; font-weight: 600; color: var(--text); margin-bottom: 0.5rem; line-height: 1.3; }
+.indicator-title {
+  font-family: var(--font-display); font-size: 1.0625rem; font-weight: 600;
+  color: var(--text); margin-bottom: 0.5rem; line-height: 1.3;
+}
 .indicator-body { font-size: 0.875rem; color: var(--text-muted); line-height: 1.6; }
+
+/* ABOUT */
 .about-stats { display: flex; gap: 3rem; margin-top: 2rem; flex-wrap: wrap; }
-.about-stat .stat-number { font-size: 2rem; }
-#cta { text-align: center; padding: clamp(5rem, 10vw, 10rem) 0; position: relative; overflow: hidden; }
-.cta-glow { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 600px; height: 400px; background: radial-gradient(ellipse, rgba(126,200,212,0.06) 0%, transparent 70%); pointer-events: none; }
-.cta-title { font-family: var(--font-display); font-size: clamp(2.5rem, 5vw, 4.5rem); font-weight: 600; line-height: 1.05; letter-spacing: -0.02em; color: var(--text); margin-bottom: 1.5rem; position: relative; }
-.cta-subtitle { font-size: 0.9375rem; color: var(--text-muted); margin-bottom: 2.5rem; max-width: 55ch; margin-left: auto; margin-right: auto; line-height: 1.7; position: relative; }
+
+/* CTA */
+#cta {
+  text-align: center; padding: clamp(5rem, 10vw, 10rem) 0;
+  position: relative; overflow: hidden;
+}
+.cta-glow {
+  position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);
+  width: 600px; height: 400px;
+  background: radial-gradient(ellipse, rgba(126,200,212,0.06) 0%, transparent 70%);
+  pointer-events: none;
+}
+.cta-title {
+  font-family: var(--font-display); font-size: clamp(2.5rem, 5vw, 4.5rem);
+  font-weight: 600; line-height: 1.05; letter-spacing: -0.02em;
+  color: var(--text); margin-bottom: 1.5rem; position: relative;
+}
+.cta-subtitle {
+  font-family: var(--font-display); font-size: clamp(1.1rem, 2vw, 1.375rem);
+  font-style: italic; color: var(--text-muted); margin-bottom: 3rem;
+  max-width: 50ch; margin-left: auto; margin-right: auto; line-height: 1.5; position: relative;
+}
+.cta-button {
+  display: inline-flex; align-items: center; gap: 0.75rem;
+  font-family: var(--font-mono); font-size: 0.875rem; letter-spacing: 0.08em;
+  color: var(--bg); background: var(--accent); padding: 1rem 2.5rem; border-radius: 4px;
+  text-decoration: none; position: relative;
+  transition: background var(--transition), transform var(--transition), box-shadow var(--transition);
+}
+.cta-button:hover { background: var(--accent-hover); transform: translateY(-2px); box-shadow: 0 8px 30px rgba(79,152,163,0.25); }
+.cta-button::after { content: '\2192'; transition: transform var(--transition); }
+.cta-button:hover::after { transform: translateX(4px); }
 .cta-buttons { display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; position: relative; }
+
+/* FOOTER */
 footer { padding: 3rem 0; text-align: center; border-top: 1px solid var(--border-subtle); }
 .footer-text { font-family: var(--font-mono); font-size: 0.75rem; color: var(--text-faint); letter-spacing: 0.08em; }
 .footer-text a { color: var(--accent); text-decoration: none; }
+
+/* RESPONSIVE */
 @media (max-width: 768px) {
-  .hero-stats { grid-template-columns: repeat(2, 1fr); }
+  .stats-row { grid-template-columns: repeat(2, 1fr); }
   .stat-item:nth-child(2) { border-right: 1px solid var(--border); }
   .two-col { grid-template-columns: 1fr; gap: 1.5rem; }
   .process-step { grid-template-columns: 1fr; gap: 0.5rem; }
@@ -161,16 +372,39 @@ footer { padding: 3rem 0; text-align: center; border-top: 1px solid var(--border
   .nav-links { display: none; }
 }
 @media (max-width: 480px) { .compliance-grid { grid-template-columns: 1fr; } }
-.reveal { opacity: 0; transform: translateY(24px); transition: opacity 0.7s var(--ease-out), transform 0.7s var(--ease-out); }
+
+/* REVEAL */
+.reveal {
+  opacity: 0; transform: translateY(24px);
+  transition: opacity 0.7s var(--ease-out), transform 0.7s var(--ease-out);
+}
 .reveal.visible { opacity: 1; transform: translateY(0); }
 </style>
 </head>
 <body>
-<div id="progress"></div>
-<nav id="nav"><div class="nav-inner"><a href="#" class="nav-logo">CMPRSSN</a><div class="nav-links"><a href="#gap" class="nav-link">The Gap</a><a href="#research" class="nav-link">Research</a><a href="#participate" class="nav-link">Participate</a><a href="#returns" class="nav-link">What You Get</a></div><a href="https://app.reclaim.ai/m/high/yalor-and-mikyo-hour" target="_blank" class="nav-cta">Book a Conversation</a></div></nav>
 
+<div id="progress"></div>
+
+<nav id="nav">
+  <div class="nav-inner">
+    <a href="#" class="nav-logo">CMPRSSN</a>
+    <div class="nav-links">
+      <a href="#gap" class="nav-link">The Gap</a>
+      <a href="#research" class="nav-link">Research</a>
+      <a href="#participate" class="nav-link">Participate</a>
+      <a href="#returns" class="nav-link">What You Get</a>
+    </div>
+    <a href="https://app.reclaim.ai/m/high/yalor-and-mikyo-hour" target="_blank" class="nav-cta">Book a Conversation</a>
+  </div>
+</nav>
+
+<!-- HERO -->
 <section id="hero">
-  <div class="hero-bg"><div class="hero-grid"></div><div class="hero-glow"></div><div class="hero-glow-2"></div></div>
+  <div class="hero-bg">
+    <div class="hero-grid"></div>
+    <div class="hero-glow"></div>
+    <div class="hero-glow-2"></div>
+  </div>
   <div class="hero-content">
     <div class="hero-eyebrow">Field Research &middot; Q2 2026</div>
     <h1 class="hero-title">Your organization&rsquo;s codebook was written for humans at human speed. <em>The rewrite is overdue.</em></h1>
@@ -186,22 +420,37 @@ footer { padding: 3rem 0; text-align: center; border-top: 1px solid var(--border
   </div>
 </section>
 
+<!-- THE GAP -->
 <section id="gap">
   <div class="container-wide">
     <span class="section-label reveal">The Structural Gap</span>
     <h2 class="section-title reveal">The surveys measured adoption. We&rsquo;re studying what breaks when adoption meets your org chart.</h2>
-    <div class="hero-stats reveal" style="opacity:1;animation:none;">
-      <div class="stat-item"><span class="stat-number" data-target="56">0</span><span class="stat-label">% CEOs see no AI return</span></div>
-      <div class="stat-item"><span class="stat-number" data-target="95">0</span><span class="stat-label">% Pilots fail to scale</span></div>
-      <div class="stat-item"><span class="stat-number" data-target="70">0</span><span class="stat-label">% Failure is org, not tech</span></div>
-      <div class="stat-item"><span class="stat-number">0</span><span class="stat-label">Field studies from inside</span></div>
+
+    <div class="stats-row reveal">
+      <div class="stat-item">
+        <span class="stat-number" data-target="56">0</span>
+        <span class="stat-label">% CEOs seeing no AI return (PwC)</span>
+      </div>
+      <div class="stat-item">
+        <span class="stat-number" data-target="95">0</span>
+        <span class="stat-label">% Pilots fail to scale (MIT)</span>
+      </div>
+      <div class="stat-item">
+        <span class="stat-number" data-target="70">0</span>
+        <span class="stat-label">% Failure is org, not tech (BCG)</span>
+      </div>
+      <div class="stat-item">
+        <span class="stat-number">0</span>
+        <span class="stat-label">Field studies from inside the failure</span>
+      </div>
     </div>
-    <div class="two-col reveal" style="margin-top:3rem;">
-      <div>
+
+    <div class="two-col reveal">
+      <div class="prose">
         <p>The major firms surveyed thousands of executives. The data is useful at the macro level. But it describes the problem from 30,000 feet. None of it captures what is happening on the ground: why a pilot succeeds in one team and dies when it crosses a department boundary. Why the org chart hasn&rsquo;t changed even though leadership says AI is the top priority. Why the most sophisticated AI usage in some companies is happening in the shadow, outside the official strategy.</p>
         <p>These are not technology questions. They are organizational questions. And they require a different kind of research: structured conversations with the people who are knee deep building the tacit knowledge that surveys don&rsquo;t reach.</p>
       </div>
-      <div>
+      <div class="prose">
         <p>We study two populations in parallel. Enterprise leaders restructuring organizations that were built before agents existed. And frontier operators who started with agents from day one: teams of 12 running at the output of 200, solo founders with agent departments, protocol teams building autonomous systems.</p>
         <p>The enterprise side shows where transformation stalls under institutional weight. The frontier side shows what it looks like when it works. Together, the patterns tell a story neither population can see alone.</p>
       </div>
@@ -209,118 +458,274 @@ footer { padding: 3rem 0; text-align: center; border-top: 1px solid var(--border
   </div>
 </section>
 
+<!-- RESEARCH -->
 <section id="research">
   <div class="container">
     <span class="section-label reveal">The Research</span>
     <h2 class="section-title reveal">Six questions the surveys never asked.</h2>
+
     <div class="process-steps">
-      <div class="process-step reveal"><div class="step-number">01</div><div><div class="step-title">How far has your organization actually restructured?</div><div class="step-body">Not adopted tools. Restructured. Which roles changed? Which decision rights shifted? Which parts of the org chart haven&rsquo;t moved at all? The distance between where you are and where the structure needs to be is the gap that determines everything else.</div></div></div>
-      <div class="process-step reveal"><div class="step-number">02</div><div><div class="step-title">Where exactly does transformation break?</div><div class="step-body">&ldquo;Organizational failure&rdquo; is a label, not a diagnosis. We&rsquo;re distinguishing between culture failures (people feel threatened), structural failures (nobody owns the pilot-to-production path), governance failures (the &ldquo;go fast but also slow down&rdquo; contradiction), and political failures (quiet sabotage from people protecting territory). Each one requires a different response.</div></div></div>
-      <div class="process-step reveal"><div class="step-number">03</div><div><div class="step-title">Where does the money actually go?</div><div class="step-body">Research shows 70% of transformation value comes from changing how people work. Most organizations spend less than 15% of their AI budget there. The gap between where the money goes and where the value comes from is a pattern we can measure and benchmark across the cohort.</div></div></div>
-      <div class="process-step reveal"><div class="step-number">04</div><div><div class="step-title">What&rsquo;s happening below the radar?</div><div class="step-body">In many organizations, the most sophisticated AI use is unsanctioned. Personal subscriptions. Workaround workflows. Tools that IT doesn&rsquo;t know about. The shadow isn&rsquo;t a compliance problem. It&rsquo;s a signal about where the official strategy is failing to meet real needs.</div></div></div>
-      <div class="process-step reveal"><div class="step-number">05</div><div><div class="step-title">Who wins and who loses inside the organization?</div><div class="step-body">Restructuring redistributes power. Some roles expand, some disappear, some fight back quietly. The political dynamics of transformation are invisible in survey data. The interviews surface them.</div></div></div>
-      <div class="process-step reveal"><div class="step-number">06</div><div><div class="step-title">Are regulatory deadlines helping or hurting?</div><div class="step-body">New rules are arriving on a fixed timeline. For some organizations, the deadlines are creating the urgency that gets transformation funded. For others, compliance work is consuming all the oxygen. We want to know which pattern holds for you and why.</div></div></div>
+      <div class="process-step reveal">
+        <div class="step-number">01</div>
+        <div>
+          <div class="step-title">How far has your organization actually restructured?</div>
+          <div class="step-body">Not adopted tools. Restructured. Which roles changed? Which decision rights shifted? Which parts of the org chart haven&rsquo;t moved at all? The distance between where you are and where the structure needs to be is the gap that determines everything else.</div>
+        </div>
+      </div>
+      <div class="process-step reveal">
+        <div class="step-number">02</div>
+        <div>
+          <div class="step-title">Where exactly does transformation break?</div>
+          <div class="step-body">&ldquo;Organizational failure&rdquo; is a label, not a diagnosis. We&rsquo;re distinguishing between culture failures (people feel threatened), structural failures (nobody owns the pilot-to-production path), governance failures (the &ldquo;go fast but also slow down&rdquo; contradiction), and political failures (quiet sabotage from people protecting territory). Each one requires a different response.</div>
+        </div>
+      </div>
+      <div class="process-step reveal">
+        <div class="step-number">03</div>
+        <div>
+          <div class="step-title">Where does the money actually go?</div>
+          <div class="step-body">Research shows 70% of transformation value comes from changing how people work. Most organizations spend less than 15% of their AI budget there. The gap between where the money goes and where the value comes from is a pattern we can measure and benchmark across the cohort.</div>
+        </div>
+      </div>
+      <div class="process-step reveal">
+        <div class="step-number">04</div>
+        <div>
+          <div class="step-title">What&rsquo;s happening below the radar?</div>
+          <div class="step-body">In many organizations, the most sophisticated AI use is unsanctioned. Personal subscriptions. Workaround workflows. Tools that IT doesn&rsquo;t know about. The shadow isn&rsquo;t a compliance problem. It&rsquo;s a signal about where the official strategy is failing to meet real needs.</div>
+        </div>
+      </div>
+      <div class="process-step reveal">
+        <div class="step-number">05</div>
+        <div>
+          <div class="step-title">Who wins and who loses inside the organization?</div>
+          <div class="step-body">Restructuring redistributes power. Some roles expand, some disappear, some fight back quietly. The political dynamics of transformation are invisible in survey data. The interviews surface them.</div>
+        </div>
+      </div>
+      <div class="process-step reveal">
+        <div class="step-number">06</div>
+        <div>
+          <div class="step-title">Are regulatory deadlines helping or hurting?</div>
+          <div class="step-body">New rules are arriving on a fixed timeline. For some organizations, the deadlines are creating the urgency that gets transformation funded. For others, compliance work is consuming all the oxygen. We want to know which pattern holds for you and why.</div>
+        </div>
+      </div>
     </div>
   </div>
 </section>
 
+<!-- REGULATORY -->
 <section id="regulatory">
   <div class="container">
     <span class="section-label reveal">Context</span>
     <h2 class="section-title reveal">New rules are arriving. Here&rsquo;s what they mean for you specifically.</h2>
-    <p class="reg-intro reveal">Whether or not regulation is your primary concern, the timeline below is reshaping the playing field for every organization that uses AI in production. It&rsquo;s worth understanding why.</p>
-    <div class="reg-box reveal"><p><strong style="color:var(--text);">The short version:</strong> The EU has passed a set of laws that, for the first time, regulate how AI systems are built, governed, and audited inside organizations. If your company operates in Europe, serves European customers, or has European partners or suppliers, these apply to you. If you&rsquo;re entirely US-based, they don&rsquo;t apply directly today, but they are setting the standard that other jurisdictions are watching closely.</p></div>
-    <div class="reg-subhead reveal">What&rsquo;s already live</div>
-    <div class="compliance-grid reveal">
-      <a href="https://www.digital-operational-resilience-act.com/" target="_blank" class="compliance-tile active"><div class="compliance-date">Live Now</div><div class="compliance-name">DORA</div><div class="compliance-desc">Requires financial institutions to demonstrate that their digital systems, including AI, can withstand disruption and are properly governed.</div><span class="compliance-status status-live">Enforced</span><div class="compliance-link">Learn more &rarr;</div></a>
-      <a href="https://digital-strategy.ec.europa.eu/en/policies/nis2-directive" target="_blank" class="compliance-tile active"><div class="compliance-date">Live Now</div><div class="compliance-name">NIS2</div><div class="compliance-desc">Extends cybersecurity and operational resilience requirements to critical infrastructure: energy, transport, healthcare, digital infrastructure.</div><span class="compliance-status status-live">Enforced</span><div class="compliance-link">Learn more &rarr;</div></a>
+    <p class="section-subtitle reveal">Whether or not regulation is your primary concern, the timeline below is reshaping the playing field for every organization that uses AI in production.</p>
+
+    <div class="prose reveal" style="margin-bottom: 2rem;">
+      <p>The EU has passed a set of laws that, for the first time, regulate how AI systems are built, governed, and audited inside organizations. If your company operates in Europe, serves European customers, or has European partners or suppliers, these apply to you. If you&rsquo;re entirely US-based, they don&rsquo;t apply directly today, but they are setting the standard that other jurisdictions are watching closely.</p>
     </div>
-    <div class="reg-subhead reveal">What&rsquo;s coming</div>
+
     <div class="compliance-grid reveal">
-      <a href="https://artificialintelligenceact.eu/" target="_blank" class="compliance-tile"><div class="compliance-date">August 2026</div><div class="compliance-name">EU AI Act</div><div class="compliance-desc">High-risk enforcement begins. If you deploy AI in hiring, credit scoring, critical infrastructure, or any high-risk domain, you will need conformity assessments, risk documentation, and audit trails.</div><span class="compliance-status status-imminent">5 Months</span><div class="compliance-link">Full text and guidance &rarr;</div></a>
-      <a href="https://single-market-economy.ec.europa.eu/sectors/machinery_en" target="_blank" class="compliance-tile"><div class="compliance-date">January 2027</div><div class="compliance-name">Machinery Reg</div><div class="compliance-desc">Replaces the old Machinery Directive. If you manufacture or deploy machinery that incorporates AI, the safety and documentation requirements have fundamentally changed.</div><span class="compliance-status status-approaching">10 Months</span><div class="compliance-link">Learn more &rarr;</div></a>
+      <a href="https://www.digital-operational-resilience-act.com/" target="_blank" class="compliance-tile active">
+        <div class="compliance-date">Live Now</div>
+        <div class="compliance-name">DORA</div>
+        <div class="compliance-desc">Digital operational resilience for financial services. If you&rsquo;re using AI agents in any operational capacity, this is already enforceable.</div>
+        <span class="compliance-status status-live">Enforced</span>
+        <div class="compliance-link">Read summary &rarr;</div>
+      </a>
+      <a href="https://digital-strategy.ec.europa.eu/en/policies/nis2-directive" target="_blank" class="compliance-tile active">
+        <div class="compliance-date">Live Now</div>
+        <div class="compliance-name">NIS2</div>
+        <div class="compliance-desc">Network and information security for critical infrastructure: energy, transport, healthcare, digital infrastructure.</div>
+        <span class="compliance-status status-live">Enforced</span>
+        <div class="compliance-link">Read summary &rarr;</div>
+      </a>
+      <a href="https://artificialintelligenceact.eu/" target="_blank" class="compliance-tile">
+        <div class="compliance-date">August 2026</div>
+        <div class="compliance-name">EU AI Act</div>
+        <div class="compliance-desc">High-risk system enforcement begins. Conformity assessments, risk management, human oversight, audit trails.</div>
+        <span class="compliance-status status-imminent">5 Months</span>
+        <div class="compliance-link">Full text and guidance &rarr;</div>
+      </a>
+      <a href="https://single-market-economy.ec.europa.eu/sectors/machinery_en" target="_blank" class="compliance-tile">
+        <div class="compliance-date">January 2027</div>
+        <div class="compliance-name">Machinery Reg</div>
+        <div class="compliance-desc">EU Machinery Regulation replaces Directive. AI in autonomous systems, robotics, and industrial automation.</div>
+        <span class="compliance-status status-approaching">10 Months</span>
+        <div class="compliance-link">Learn more &rarr;</div>
+      </a>
     </div>
-    <div class="prose reveal" style="margin-top:2rem;">
+
+    <div class="prose reveal" style="margin-top: 2rem;">
       <p><strong>Why this matters even if you&rsquo;re not directly regulated:</strong> Your European customers and partners will increasingly require evidence of AI governance from their suppliers. The organizational capabilities these rules demand (audit trails, human oversight frameworks, risk documentation) are the same capabilities that make AI transformation work at scale, regulation or not. And the companies that build this infrastructure now are building a structural advantage.</p>
       <p><strong>The research tracks how organizations are actually responding to these deadlines.</strong> Some are using them as the forcing function that gets transformation funded. Others are paralyzed by compliance overhead. Your experience is data we need.</p>
     </div>
   </div>
 </section>
 
+<!-- PARTICIPATE -->
 <section id="participate">
   <div class="container-wide">
     <span class="section-label reveal">Contribute</span>
     <h2 class="section-title reveal">A conversation between practitioners. Not a data extraction exercise.</h2>
     <p class="section-subtitle reveal">30 minutes. Survey is optional.</p>
+
     <div class="paths-grid reveal">
-      <div class="path-card featured"><span class="path-badge">Highest Impact</span><div class="path-time">~30 minutes</div><h3>Join a Research Conversation</h3><p>You bring the specifics: the pilots that stalled, the budget ratio you wish you could change, the politics that no strategy deck captures. We bring patterns from 50 conversations across enterprise and frontier, including operators at companies like Cursor (300 people, $2B revenue) and solo founders running entire businesses with dark factory agent teams.</p><ul class="path-detail"><li>Ten questions, probes calibrated to your context</li><li>Peer-to-peer, not an extraction exercise</li><li>Your patterns become data in the first field study that puts enterprise and frontier side by side</li></ul><a href="https://app.reclaim.ai/m/high/yalor-and-mikyo-hour" target="_blank" class="btn btn-accent" style="margin-top:auto;">Book a Conversation</a></div>
-      <div class="path-card"><div class="path-time">~8 min &middot; optional</div><h3>Take the Survey</h3><p>17 questions. Your structure, your deployment, your investment ratio, your biggest blocker. Anonymous by default.</p><a href="https://cmprssn.notion.site/335dfe91f10480eca8e7e4e4255b1174" target="_blank" class="btn btn-ghost" style="margin-top:auto;">Fill Out the Survey</a></div>
+      <div class="path-card featured">
+        <span class="path-badge">Highest Impact</span>
+        <div class="path-time">~30 minutes</div>
+        <h3>Join a Research Conversation</h3>
+        <p>You bring the specifics: the pilots that stalled, the budget ratio you wish you could change, the politics that no strategy deck captures. We bring patterns from 50 conversations across enterprise and frontier, including operators at companies like Cursor (300 people, $2B revenue) and solo founders running entire businesses with dark factory agent teams.</p>
+        <ul class="path-details">
+          <li>Ten questions, probes calibrated to your context</li>
+          <li>Peer-to-peer, not an extraction exercise</li>
+          <li>Your patterns become data in the first field study that puts enterprise and frontier side by side</li>
+        </ul>
+        <a href="https://app.reclaim.ai/m/high/yalor-and-mikyo-hour" target="_blank" class="btn btn-accent btn-full" style="margin-top: auto;">Book a Conversation</a>
+      </div>
+      <div class="path-card">
+        <div class="path-time">~8 min &middot; optional</div>
+        <h3>Take the Survey</h3>
+        <p>17 questions. Your structure, your deployment, your investment ratio, your biggest blocker. Anonymous by default.</p>
+        <div style="flex: 1;"></div>
+        <a href="https://cmprssn.notion.site/335dfe91f10480eca8e7e4e4255b1174" target="_blank" class="btn btn-ghost btn-full" style="margin-top: auto;">Fill Out the Survey</a>
+      </div>
     </div>
   </div>
 </section>
 
+<!-- ATTRIBUTION -->
 <section id="attribution">
   <div class="container-wide">
     <span class="section-label reveal">Your Terms</span>
     <h2 class="section-title reveal">You decide how you appear.</h2>
+
     <div class="attr-grid reveal">
-      <div class="attr-card"><div class="attr-title">Anonymous</div><div class="attr-desc">Nothing traces back. No organization, no industry, no identifiers.</div></div>
-      <div class="attr-card"><div class="attr-title">Context Only</div><div class="attr-desc">&ldquo;A VP of AI at a 5,000-person financial services firm&rdquo; or &ldquo;a CAIO at a manufacturing company navigating the Machinery Regulation.&rdquo; Your name stays out.</div></div>
-      <div class="attr-card"><div class="attr-title">Named Contributor</div><div class="attr-desc">Your name and organization next to your quotes, approved before publication. Named contributors get the strongest network introductions.</div></div>
+      <div class="attr-card">
+        <div class="attr-title">Anonymous</div>
+        <div class="attr-desc">Nothing traces back. No organization, no industry, no identifiers.</div>
+      </div>
+      <div class="attr-card">
+        <div class="attr-title">Context Only</div>
+        <div class="attr-desc">&ldquo;A VP of AI at a 5,000-person financial services firm&rdquo; or &ldquo;a CAIO at a manufacturing company navigating the Machinery Regulation.&rdquo; Your name stays out.</div>
+      </div>
+      <div class="attr-card">
+        <div class="attr-title">Named Contributor</div>
+        <div class="attr-desc">Your name and organization next to your quotes, approved before publication. Named contributors get the strongest network introductions.</div>
+      </div>
     </div>
   </div>
 </section>
 
+<!-- WHAT YOU GET -->
 <section id="returns">
   <div class="container-wide">
     <span class="section-label reveal">In Return</span>
     <h2 class="section-title reveal">Join a community of practitioners leading the same change you are.</h2>
     <p class="section-subtitle reveal">This is not a one-time survey. It is the first cycle of an ongoing research program that connects the people navigating this transition with each other and with the frontier operators building what comes next.</p>
+
     <div class="indicator-grid reveal">
-      <div class="indicator-card"><div class="indicator-title">A practitioner network you can&rsquo;t build alone</div><div class="indicator-body">The 50 people in this study are enterprise leaders, frontier operators, and builders working at the edge of what&rsquo;s possible. You get introduced to the two or three people in the cohort whose challenges or solutions are closest to yours. Curated, not algorithmic.</div></div>
-      <div class="indicator-card"><div class="indicator-title">Your benchmarking snapshot</div><div class="indicator-body">A one-page diagnostic showing where your organization sits relative to the cohort: restructuring progress, investment ratio, deployment depth, regulatory readiness. Contextualized to your industry and size. This benchmark doesn&rsquo;t exist yet. We&rsquo;re building it together.</div></div>
-      <div class="indicator-card"><div class="indicator-title">The full report before anyone else</div><div class="indicator-body">The contributor edition of the published findings, with methodology, anonymized cases, and your diagnostic overlaid on the cohort data. Enterprise patterns alongside frontier patterns. Delivered before public release.</div></div>
-      <div class="indicator-card"><div class="indicator-title">An ongoing seat at the table</div><div class="indicator-body">This research runs twice a year. Contributors from the first cycle shape the questions for the next one. The network grows. The benchmark data gets richer. Your participation in cycle one gives you a founding seat in a community that compounds over time.</div></div>
+      <div class="indicator-card">
+        <div class="indicator-title">A practitioner network you can&rsquo;t build alone</div>
+        <div class="indicator-body">The 50 people in this study are enterprise leaders, frontier operators, and builders working at the edge of what&rsquo;s possible. As a contributor, you get introduced to the two or three people in the cohort whose challenges or solutions are closest to yours. Curated, not algorithmic.</div>
+      </div>
+      <div class="indicator-card">
+        <div class="indicator-title">Your benchmarking snapshot</div>
+        <div class="indicator-body">A one-page diagnostic showing where your organization sits relative to the cohort: restructuring progress, investment ratio, deployment depth, regulatory readiness. Contextualized to your industry and size. This benchmark doesn&rsquo;t exist elsewhere.</div>
+      </div>
+      <div class="indicator-card">
+        <div class="indicator-title">The full report before anyone else sees it</div>
+        <div class="indicator-body">The contributor edition of the published findings, with methodology, anonymized cases, and your diagnostic overlaid on the cohort data. Enterprise patterns alongside frontier patterns. Delivered before public release.</div>
+      </div>
+      <div class="indicator-card">
+        <div class="indicator-title">An ongoing seat at the table</div>
+        <div class="indicator-body">This research runs twice a year. Contributors from the first cycle shape the questions for the next one. The network grows. The benchmark data gets richer. Your participation in cycle one gives you a founding seat in a practitioner community that compounds over time.</div>
+      </div>
     </div>
   </div>
 </section>
 
+<!-- ABOUT -->
 <section id="about">
   <div class="container">
     <span class="section-label reveal">About CMPRSSN</span>
     <h2 class="section-title reveal">Research from inside the phenomenon.</h2>
+    <p class="section-subtitle reveal">CMPRSSN studies human-agent compositions. What determines whether the integration between people and agents compounds or hits a wall. Three people, AI-native practice. Living and practicing at the frontier.</p>
     <div class="prose reveal">
-      <p>CMPRSSN studies human-agent compositions. What determines whether the integration between people and agents compounds or hits a wall. Three people, AI-native practice. Living and practicing at the frontier.</p>
       <p>First cycle of a semi-annual research series. Fifty conversations, two populations: enterprise leaders navigating legacy, frontier operators building from scratch. The contrast is the method.</p>
       <p>Research led by <strong>Lisa Rousey-Rueth</strong>, <strong>Miky&ouml; Clark</strong>, <strong>Yalor Mewn</strong>, <strong>Ryan Van Sickle</strong>, and <strong>Jeremias Pedreira</strong>.</p>
     </div>
     <div class="about-stats reveal">
-      <div class="about-stat"><span class="stat-number">50</span><span class="stat-label">Primary Interviews</span></div>
-      <div class="about-stat"><span class="stat-number">25</span><span class="stat-label">Enterprise</span></div>
-      <div class="about-stat"><span class="stat-number">25</span><span class="stat-label">Frontier</span></div>
-      <div class="about-stat"><span class="stat-number">6</span><span class="stat-label">Objectives</span></div>
-      <div class="about-stat"><span class="stat-number">Q3</span><span class="stat-label">2026 Publish</span></div>
+      <div><span class="stat-number" style="font-size: 2rem;">50</span><span class="stat-label">Primary Interviews</span></div>
+      <div><span class="stat-number" style="font-size: 2rem;">25</span><span class="stat-label">Enterprise</span></div>
+      <div><span class="stat-number" style="font-size: 2rem;">25</span><span class="stat-label">Frontier</span></div>
+      <div><span class="stat-number" style="font-size: 2rem;">6</span><span class="stat-label">Objectives</span></div>
+      <div><span class="stat-number" style="font-size: 2rem;">Q3</span><span class="stat-label">2026 Publish</span></div>
     </div>
   </div>
 </section>
 
+<!-- FINAL CTA -->
 <section id="cta">
   <div class="cta-glow"></div>
-  <div class="container" style="position:relative;">
-    <h2 class="cta-title reveal">The people running this transition are building the reference <em style="color:var(--highlight);font-style:italic;">together.</em></h2>
-    <p class="cta-subtitle reveal">If you are navigating the gap between strategy and execution, managing the political economy of transformation, staring at a regulatory deadline with no conformity assessment pipeline, or running a shadow AI architecture more sophisticated than your official strategy, your 30 minutes makes this research real.</p>
+  <div class="container" style="position: relative;">
+    <div class="section-label reveal" style="text-align: center;">The Question</div>
+    <h2 class="cta-title reveal">The people running this transition are building the reference <em style="color: var(--highlight); font-style: italic;">together.</em></h2>
+    <p class="cta-subtitle reveal">If you are navigating the gap between strategy and execution, managing the politics of restructuring, or running a shadow AI architecture more sophisticated than your official strategy, your 30 minutes makes this research real.</p>
     <div class="cta-buttons reveal">
-      <a href="https://app.reclaim.ai/m/high/yalor-and-mikyo-hour" target="_blank" class="btn btn-primary">Book a Research Conversation</a>
-      <a href="https://cmprssn.notion.site/335dfe91f10480eca8e7e4e4255b1174" target="_blank" class="btn btn-ghost">Take the Enterprise Survey</a>
+      <a href="https://app.reclaim.ai/m/high/yalor-and-mikyo-hour" target="_blank" class="cta-button">Book a Research Conversation</a>
     </div>
   </div>
 </section>
 
-<footer><div class="container"><p class="footer-text">CMPRSSN &middot; Agentic Intelligence Program &middot; Enterprise Track &middot; Q2 2026<br><a href="https://cmprssn.xyz">cmprssn.xyz</a> &middot; <a href="/cdn-cgi/l/email-protection#b1d6c3dec6c5d9f1d2dcc1c3c2c2df9fc9c8cb"><span class="__cf_email__" data-cfemail="5c3b2e332b28341c3f312c2e2f2f3272242526">[email&#160;protected]</span></a></p></div></footer>
+<footer>
+  <div class="container">
+    <p class="footer-text">CMPRSSN &middot; Agentic Intelligence Program &middot; Enterprise Track &middot; Q2 2026<br><a href="https://cmprssn.xyz">cmprssn.xyz</a> &middot; <a href="mailto:growth@cmprssn.xyz">growth@cmprssn.xyz</a></p>
+  </div>
+</footer>
 
-<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
-window.addEventListener('scroll',()=>{const h=document.documentElement.scrollHeight-window.innerHeight;document.getElementById('progress').style.width=(window.scrollY/h*100)+'%';});
-const ro=new IntersectionObserver((e)=>{e.forEach((x,i)=>{if(x.isIntersecting){setTimeout(()=>x.target.classList.add('visible'),i*60);ro.unobserve(x.target);}});},{threshold:0.15});
-document.querySelectorAll('.reveal').forEach(el=>ro.observe(el));
-function ac(el){const t=parseInt(el.dataset.target);if(!t)return;const d=1200,s=performance.now();function u(n){const p=Math.min((n-s)/d,1);el.textContent=Math.round(t*(1-Math.pow(1-p,3)));if(p<1)requestAnimationFrame(u);}requestAnimationFrame(u);}
-document.qu
+<script>
+// Progress bar
+window.addEventListener('scroll', function() {
+  var h = document.documentElement.scrollHeight - window.innerHeight;
+  document.getElementById('progress').style.width = (window.scrollY / h * 100) + '%';
+});
+
+// Reveal on scroll
+var revealObserver = new IntersectionObserver(function(entries) {
+  entries.forEach(function(entry, i) {
+    if (entry.isIntersecting) {
+      setTimeout(function() { entry.target.classList.add('visible'); }, i * 60);
+      revealObserver.unobserve(entry.target);
+    }
+  });
+}, { threshold: 0.15 });
+document.querySelectorAll('.reveal').forEach(function(el) { revealObserver.observe(el); });
+
+// Counter animation
+function animateCounter(el) {
+  var target = parseInt(el.dataset.target);
+  if (!target) return;
+  var duration = 1200;
+  var start = performance.now();
+  function update(now) {
+    var p = Math.min((now - start) / duration, 1);
+    var eased = 1 - Math.pow(1 - p, 3);
+    el.textContent = Math.round(target * eased);
+    if (p < 1) requestAnimationFrame(update);
+  }
+  requestAnimationFrame(update);
+}
+
+// Observe stats for counter animation
+var statsEl = document.querySelector('.stats-row');
+if (statsEl) {
+  new IntersectionObserver(function(entries) {
+    entries.forEach(function(entry) {
+      if (entry.isIntersecting) {
+        entry.target.querySelectorAll('.stat-number[data-target]').forEach(animateCounter);
+      }
+    });
+  }, { threshold: 0.5 }).observe(statsEl);
+}
+</script>
+
+</body>
+</html>
